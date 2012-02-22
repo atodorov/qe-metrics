@@ -1,5 +1,9 @@
 QE-Metrics is a set of tools which provide metrics information for QE folks.
 
+It's goal is to make it easy to track personal perfomance for people working
+in QE departments. The project has a modular architecture to allow extracting
+metrics from different QE related systems.
+
 Metrics
 -------
 
@@ -22,7 +26,7 @@ Metrics
 * [MoinMoin](http://moinmo.in) - collaborative wiki
     - number of edits
 * [Beaker](http://fedorahosted.org/beaker) - automated testing framework
-    * *NOT YET IMPLEMENTED***
+    - **NOT YET IMPLEMENTED**
     - number of new/updated tests
     - number of test jobs execution
 
