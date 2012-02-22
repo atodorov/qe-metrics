@@ -1,0 +1,78 @@
+#!/usr/bin/python
+
+# Copyright (c) 2012, Alexander Todorov <atodorov()otb.bg>
+
+
+import os
+import sys
+import optparse
+from pprint import pprint
+from ConfigParser import SafeConfigParser
+
+PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+def import_file(filename):
+    try:
+        module_name, module_ext = os.path.splitext(filename)
+        save_cwd = os.getcwd()
+        os.chdir(PROJECT_DIR)
+        module_obj = __import__(module_name)
+        module_obj.__file__ = PROJECT_DIR + '/' + filename
+        globals()[module_name] = module_obj
+        os.chdir(save_cwd)
+
+        return module_obj
+    except:
+        raise ImportError
+
+
+p = optparse.OptionParser()
+p.add_option('-s', '--start', dest="start", default=None, help="Start date: YYYY-MM-DD")
+p.add_option('-e', '--end',   dest="end",   default=None, help="End date:   YYYY-MM-DD")
+
+(opt, args) = p.parse_args()
+
+if not opt.start:
+    print "--start is mandatory!"
+    sys.exit(1)
+
+if not opt.end:
+    print "--end is mandatory!"
+    sys.exit(1)
+
+opt.start = '%s 00:00:00' % opt.start
+opt.end = '%s 23:59:59' % opt.end
+
+metrics =  {
+    'start' : opt.start,
+    'end'   : opt.end,
+}
+
+
+# try to find the config file. 
+
+conf_path = os.environ['HOME'] + '/.qe-metrics/qe-metrics.conf'
+if not os.path.exists(conf_path):
+    print "ERROR: ~/.qe-metrics/qe-metrics.conf not found! See the qe-metrics.conf.example!"
+    sys.exit(1)
+
+
+cp = SafeConfigParser()
+cp.read([conf_path])
+plugins = dict(
+        [(key, cp.get('plugins', key)) for key in [
+            'bugzilla', 'request_tracker', 'nitrate', 'moinmoin', 'beaker'
+        ]]
+    )
+
+
+
+for name in plugins.keys():
+    if int(plugins[name]): ## 1 == enabled
+        plugin = import_file('%s_plugin.py' % name)
+
+        print "INFO: Fetching metrics for %s" % name
+        metrics[name] = plugin.get_metrics(opt.start, opt.end)
+
+
+pprint(metrics)
