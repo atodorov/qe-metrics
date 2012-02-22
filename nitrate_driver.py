@@ -6,6 +6,7 @@ http://git.fedorahosted.org/git/?p=nitrate.git;a=blob_plain;f=trunk/nitrate/docs
 Nitrate is licensed under GNU LGPL.
 
 Copyright (C) 2011  Red Hat, Inc.
+Copyright (c) 2012 Alexander Todorov <atodorov()otb.bg>
 
 Use this class to access Nitrate via XML-RPC
 This code is based on http://landfill.bugzilla.org/testopia2/testopia/contrib/drivers/python/testopia.py
@@ -249,11 +250,15 @@ class NitrateXmlrpc(object):
         cp.read([filename])
         kwargs = dict(
             [(key, cp.get('nitrate', key)) for key in [
-                'username', 'password', 'url'
+                'username', 'password', 'url', 'use_mod_kerb'
             ]]
         )
         
-        return NitrateXmlrpc(**kwargs)
+
+        if kwargs['use_mod_kerb']:
+            return NitrateKerbXmlrpc(kwargs['url'])
+        else:
+            return NitrateXmlrpc(**kwargs)
     
     def __init__(self, username, password, url, use_mod_auth_kerb = False):
         if url.startswith('https://'):
