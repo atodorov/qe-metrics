@@ -4,6 +4,57 @@ It's goal is to make it easy to track personal perfomance for people working
 in QE departments. The project has a modular architecture to allow extracting
 metrics from different QE related systems.
 
+Installation
+-------------
+
+        git clone git://github.com/atodorov/qe-metrics.git
+
+Create config files in `~/.qe-metrics`:
+
+* `qe-metrics.conf`
+
+        # Set to 0 to disable
+        [plugins]
+        bugzilla = 1
+        request_tracker = 1
+        nitrate = 1
+        moinmoin = 1
+        beaker = 0
+
+* `bugzilla.conf`
+
+        [main]
+        url = bugzilla.example.com
+        username = you@example.com
+
+* `request_tracker.conf`
+
+        [main]
+        url = rt.example.com/rt
+        email = you@example.com
+        krb_auth = True
+
+* `nitrate.conf`
+
+        [nitrate]
+        url = https://nitrate.example.com/xmlrpc/
+        username = you@example.com
+        password = foo
+        use_mod_kerb = True
+
+
+* `moinmoin.conf`
+
+        [main]
+        url = wiki.example.com
+        username = you
+
+* `beaker.conf`
+
+        [main]
+        url = beaker.example.com
+        username = you@example.com
+
 Metrics
 -------
 
