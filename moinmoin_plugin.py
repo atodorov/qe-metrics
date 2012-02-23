@@ -1,10 +1,6 @@
 #!/usr/bin/python
 
-###########################
-#
-# QE metrics for atodorov
-#
-###########################
+# Copyright (c) 2012, Alexander Todorov <atodorov@redhat.com>
 
 import os
 import getpass

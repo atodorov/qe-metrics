@@ -1,10 +1,6 @@
 #!/usr/bin/python
 
-###########################
-#
-# http://requesttracker.wikia.com/wiki/REST
-#
-###########################
+# Copyright (c) 2012, Alexander Todorov <atodorov@redhat.com>
 
 import os
 import pycurl
