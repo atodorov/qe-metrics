@@ -9,6 +9,9 @@ Installation
 
         git clone git://github.com/atodorov/qe-metrics.git
 
+Configuration
+-------------
+
 Create config files in `~/.qe-metrics`:
 
 * `qe-metrics.conf`
@@ -54,6 +57,11 @@ Create config files in `~/.qe-metrics`:
         [main]
         url = beaker.example.com
         username = you@example.com
+
+
+QE-Metrics will ask for password when needed if not specified. 
+It prefers using Kerberos auth if this is supported.
+
 
 Metrics
 -------
