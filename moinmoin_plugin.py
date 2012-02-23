@@ -40,9 +40,6 @@ def get_metrics(start, end, config = None):
     # NB: Plain http
     wiki = xmlrpclib.ServerProxy("http://%s/?action=xmlrpc2" % config['url'])
 
-    # this method can be enhanced
-    # http://moinmo.in/FeatureRequests/getRecentChanges_Filters
-
     changes = wiki.getRecentChanges(start_date)
     count = 0
 

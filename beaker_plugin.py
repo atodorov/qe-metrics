@@ -45,12 +45,10 @@ def get_metrics(start, end, config = None):
 
 
     # can't filter jobs by user/period:
-    ### https://bugzilla.redhat.com/show_bug.cgi?id=794724
     #jobs = bkr.jobs.list('', 1, '', '')
 
 
-    # new tests and updated tests, see:
-    # https://bugzilla.redhat.com/show_bug.cgi?id=794728
+    # new tests and updated tests - N/A
 
     #bkr.auth.logout()
 
