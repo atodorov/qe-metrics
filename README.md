@@ -62,6 +62,10 @@ Create config files in `~/.qe-metrics`:
 QE-Metrics will ask for password when needed if not specified. 
 It prefers using Kerberos auth if this is supported.
 
+Execution
+---------
+
+        ./qe-metrics --start 2012-02-01 --end 2012-02-29
 
 Metrics
 -------
