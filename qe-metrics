@@ -59,13 +59,9 @@ if not os.path.exists(conf_path):
 
 cp = SafeConfigParser()
 cp.read([conf_path])
-plugins = dict(
-        [(key, cp.get('plugins', key)) for key in [
-            'bugzilla', 'request_tracker', 'nitrate', 'moinmoin', 'beaker'
-        ]]
-    )
 
-
+keys = [n_v[0] for n_v in cp.items('plugins')]
+plugins = dict([(key, cp.get('plugins', key)) for key in keys])
 
 for name in plugins.keys():
     if int(plugins[name]): ## 1 == enabled
