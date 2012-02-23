@@ -6,7 +6,7 @@ http://git.fedorahosted.org/git/?p=nitrate.git;a=blob_plain;f=trunk/nitrate/docs
 Nitrate is licensed under GNU LGPL.
 
 Copyright (C) 2011  Red Hat, Inc.
-Copyright (c) 2012 Alexander Todorov <atodorov()otb.bg>
+Copyright (c) 2012 Alexander Todorov <atodorov@redhat.com>
 
 Use this class to access Nitrate via XML-RPC
 This code is based on http://landfill.bugzilla.org/testopia2/testopia/contrib/drivers/python/testopia.py

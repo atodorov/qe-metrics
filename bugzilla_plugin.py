@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Copyright (c) 2012, Alexander Todorov <atodorov()otb.bg>
+# Copyright (c) 2012, Alexander Todorov <atodorov@redhat.com>
 
 import os
 import sys
@@ -13,13 +13,13 @@ def get_config(filename):
     cp.read([filename])
 
     conf = dict(
-            [(key, cp.get('redhat', key)) for key in [
+            [(key, cp.get('main', key)) for key in [
                 'url', 'username'
             ]]
         )
 
     try:
-        conf['password'] = cp.get('redhat', 'password')
+        conf['password'] = cp.get('main', 'password')
     except ConfigParser.NoOptionError:
         conf['password'] = getpass.getpass('Password for %s: ' % conf['username'])
 
