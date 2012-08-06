@@ -41,6 +41,8 @@ def get_metrics(start, end, config = None):
 
     ##### NEW bugs opened during period
     qd = {
+        'query_format' : 'advanced',
+
         'reporter' : user,
         'chfieldfrom' : start,
         'chfieldto' : end,
@@ -56,6 +58,8 @@ def get_metrics(start, end, config = None):
     ##### Bugs VERIFIED during period
 
     qd = {
+        'query_format' : 'advanced',
+
         'field0-0-0' : 'bug_status',
         'type0-0-0' : 'changedto',
         'value0-0-0' : 'VERIFIED',
@@ -81,6 +85,8 @@ def get_metrics(start, end, config = None):
     ##### Bugs VERIFIED SanityOnly during period
 
     qd = {
+        'query_format' : 'advanced',
+
         'field0-0-0' : 'cf_verified',
         'type0-0-0' : 'substring',
         'value0-0-0' : 'SanityOnly',
@@ -107,6 +113,8 @@ def get_metrics(start, end, config = None):
     ##### Bugs moved back to ASSIGNED during period
 
     qd = {
+        'query_format' : 'advanced',
+
         'field0-0-0' : 'bug_status',
         'type0-0-0' : 'changedto',
         'value0-0-0' : 'ASSIGNED',
@@ -133,6 +141,8 @@ def get_metrics(start, end, config = None):
     ##### Bugs qa_ack+ during period
 
     qd = {
+        'query_format' : 'advanced',
+
         'field0-0-0' : 'setters.login_name',
         'type0-0-0' : 'equals',
         'value0-0-0' : user,
