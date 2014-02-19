@@ -12,18 +12,15 @@ from ConfigParser import SafeConfigParser
 PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 def import_file(filename):
-    try:
-        module_name, module_ext = os.path.splitext(filename)
-        save_cwd = os.getcwd()
-        os.chdir(PROJECT_DIR)
-        module_obj = __import__(module_name)
-        module_obj.__file__ = PROJECT_DIR + '/' + filename
-        globals()[module_name] = module_obj
-        os.chdir(save_cwd)
+    module_name, module_ext = os.path.splitext(filename)
+    save_cwd = os.getcwd()
+    os.chdir(PROJECT_DIR)
+    module_obj = __import__(module_name)
+    module_obj.__file__ = PROJECT_DIR + '/' + filename
+    globals()[module_name] = module_obj
+    os.chdir(save_cwd)
 
-        return module_obj
-    except:
-        raise ImportError
+    return module_obj
 
 
 p = optparse.OptionParser()
