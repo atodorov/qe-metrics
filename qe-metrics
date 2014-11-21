@@ -24,8 +24,9 @@ def import_file(filename):
 
 
 p = optparse.OptionParser()
-p.add_option('-s', '--start', dest="start", default=None, help="Start date: YYYY-MM-DD")
-p.add_option('-e', '--end',   dest="end",   default=None, help="End date:   YYYY-MM-DD")
+p.add_option('-s', '--start',  dest="start",  default=None, help="Start date: YYYY-MM-DD")
+p.add_option('-e', '--end',    dest="end",    default=None, help="End date:   YYYY-MM-DD")
+p.add_option('-a', '--author', dest="author", default=None, help="Author of the action. Defaults to yurself.")
 
 (opt, args) = p.parse_args()
 
@@ -43,6 +44,7 @@ opt.end = '%s 23:59:59' % opt.end
 metrics =  {
     'start' : opt.start,
     'end'   : opt.end,
+    'author': opt.author,
 }
 
 
@@ -65,7 +67,7 @@ for name in plugins.keys():
         plugin = import_file('%s_plugin.py' % name)
 
         print "INFO: Fetching metrics for %s" % name
-        metrics[name] = plugin.get_metrics(opt.start, opt.end)
+        metrics[name] = plugin.get_metrics(opt.start, opt.end, opt.author)
 
 
 pprint(metrics)

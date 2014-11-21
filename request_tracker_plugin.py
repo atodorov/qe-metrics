@@ -40,8 +40,11 @@ class Response:
         self.contents = ''
 
 
-def get_metrics(start, end, config = None):
+def get_metrics(start, end, author = None, config = None):
     metrics = {}
+
+    if author:
+        print "Request Tracker plugin do not support --author option!"
 
     if config is None:
         config = get_config(os.environ['HOME'] + '/.qe-metrics/request_tracker.conf')

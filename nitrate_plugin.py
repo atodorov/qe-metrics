@@ -5,8 +5,11 @@
 import os
 from nitrate_driver import NitrateXmlrpc
 
-def get_metrics(start, end):
+def get_metrics(start, end, author = None):
     metrics = {}
+
+    if author:
+        print "Nitrate plugin do not support --author option!"
 
     nitrate = NitrateXmlrpc.from_config(os.environ['HOME'] + '/.qe-metrics/nitrate.conf')
     user = nitrate.get_me()
