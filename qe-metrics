@@ -26,7 +26,7 @@ def import_file(filename):
 p = optparse.OptionParser()
 p.add_option('-s', '--start',  dest="start",  default=None, help="Start date: YYYY-MM-DD")
 p.add_option('-e', '--end',    dest="end",    default=None, help="End date:   YYYY-MM-DD")
-p.add_option('-a', '--author', dest="author", default=None, help="Author of the action. Defaults to yurself.")
+p.add_option('-a', '--author', dest="author", default=None, help="Author of the action. Defaults to yourself.")
 
 (opt, args) = p.parse_args()
 
