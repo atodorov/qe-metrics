@@ -27,8 +27,11 @@ def get_config(filename):
     return conf
 
 
-def get_metrics(start, end, config = None):
+def get_metrics(start, end, author = None, config = None):
     metrics = {}
+
+    if author:
+        print "MoinMoin plugin do not support --author option!"
 
     if config is None:
         config = get_config(os.environ['HOME'] + '/.qe-metrics/moinmoin.conf')

@@ -25,7 +25,7 @@ def get_config(filename):
 
     return conf
 
-def get_metrics(start, end, config = None):
+def get_metrics(start, end, author = None, config = None):
     metrics = {}
 
     if config is None:
@@ -33,6 +33,9 @@ def get_metrics(start, end, config = None):
 
     user = config['username']
     password = config['password']
+
+    if not author:
+        author = user
 
     bz = bugzilla.Bugzilla(url='https://%s/xmlrpc.cgi' % config['url'])
     if not bz.login(user, password):
@@ -43,7 +46,7 @@ def get_metrics(start, end, config = None):
     qd = {
         'query_format' : 'advanced',
 
-        'reporter' : user,
+        'reporter' : author,
         'chfieldfrom' : start,
         'chfieldto' : end,
         'chfield' : '[Bug creation]',
@@ -66,7 +69,7 @@ def get_metrics(start, end, config = None):
 
         'field0-1-0' : 'bug_status',
         'type0-1-0' : 'changedby',
-        'value0-1-0' : user,
+        'value0-1-0' : author,
 
         'field0-2-0' : 'bug_status',
         'type0-2-0' : 'changedafter',
@@ -93,7 +96,7 @@ def get_metrics(start, end, config = None):
 
         'field0-1-0' : 'cf_verified',
         'type0-1-0' : 'changedby',
-        'value0-1-0' : user,
+        'value0-1-0' : author,
 
         'field0-2-0' : 'cf_verified',
         'type0-2-0' : 'changedafter',
@@ -121,7 +124,7 @@ def get_metrics(start, end, config = None):
 
         'field0-1-0' : 'bug_status',
         'type0-1-0' : 'changedby',
-        'value0-1-0' : user,
+        'value0-1-0' : author,
 
         'field0-2-0' : 'bug_status',
         'type0-2-0' : 'changedafter',
@@ -145,7 +148,7 @@ def get_metrics(start, end, config = None):
 
         'field0-0-0' : 'setters.login_name',
         'type0-0-0' : 'equals',
-        'value0-0-0' : user,
+        'value0-0-0' : author,
 
         'field0-1-0' : 'flagtypes.name',
         'type0-1-0' : 'changedto',
@@ -174,8 +177,9 @@ if __name__ == "__main__":
     from pprint import pprint
 
     p = optparse.OptionParser()
-    p.add_option('-s', '--start', dest="start", default=None, help="Start date: YYYY-MM-DD")
-    p.add_option('-e', '--end',   dest="end",   default=None, help="End date:   YYYY-MM-DD")
+    p.add_option('-s', '--start',  dest="start",  default=None, help="Start date: YYYY-MM-DD")
+    p.add_option('-e', '--end',    dest="end",    default=None, help="End date:   YYYY-MM-DD")
+    p.add_option('-a', '--author', dest="author", default=None, help="Author of the action. Defaults to yurself.")
 
     (opt, args) = p.parse_args()
 
@@ -193,7 +197,7 @@ if __name__ == "__main__":
     metrics =  {
         'start' : opt.start,
         'end'   : opt.end,
-        'bugzilla' : get_metrics(opt.start, opt.end),
+        'bugzilla' : get_metrics(opt.start, opt.end, opt.author),
     }
 
     pprint(metrics)
