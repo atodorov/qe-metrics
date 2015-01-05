@@ -4,9 +4,43 @@
 
 import os
 import sys
+import time
 import getpass
 import bugzilla
+import requests
 import ConfigParser
+
+def bugzilla_query(bz, query, config):
+    """
+        Retry Bugzilla queries in case of proxy error.
+
+        Note: constructor of bugzilla.Bugzilla class will return appropriate
+        class based on URL which breaks my attempts to override this class and
+        provide a cleaner interface!
+    """
+    max_retries = config.get('max_retries', 10)
+    retry_sleep = config.get('retry_sleep', 10) # seconds
+    attempt = 0
+
+    while True:
+        try:
+            attempt += 1
+            return bz.query(query)
+        except requests.exceptions.HTTPError as e:
+            if (e.response.status_code == 502) and (e.response.reason == 'Proxy Error'):
+                # This exception is safe to ignore.
+                # If there is another similar exception, it can be added here.
+
+                if attempt >= max_retries:
+                    raise Exception("We're unable to perform Bugzilla query due to 'Proxy Error'. Probably Bugzilla server have some difficulties.")
+                else:
+                    print "INFO: Unabe to execute query due to: '%s: %s'. Trying again (attempt %s out of %s)." % \
+                        (sys.exc_info()[0], sys.exc_info()[1], attempt+1, max_retries)
+                    time.sleep(retry_sleep)
+            else:
+                # It is safer not to ignore all other exceptions
+                raise
+
 
 def get_config(filename):
     cp = ConfigParser.SafeConfigParser()
@@ -52,7 +86,7 @@ def get_metrics(start, end, author = None, config = None):
         'chfield' : '[Bug creation]',
     }
 
-    bugs = bz.query(qd)
+    bugs = bugzilla_query(bz, qd, config)
 
     metrics['opened'] = len(bugs)
     #metrics['opened_ids'] = [b.id for b in bugs]
@@ -81,7 +115,7 @@ def get_metrics(start, end, author = None, config = None):
         'v4' : end,
     }
 
-    bugs = bz.query(qd)
+    bugs = bugzilla_query(bz, qd, config)
 
     metrics['verified'] = len(bugs)
     #metrics['verified_ids'] = [b.id for b in bugs]
@@ -109,7 +143,7 @@ def get_metrics(start, end, author = None, config = None):
         'v4' : end,
     }
 
-    bugs = bz.query(qd)
+    bugs = bugzilla_query(bz, qd, config)
 
     metrics['verified_sanity_only'] = len(bugs)
     #metrics['verified_sanity_only_ids'] = [b.id for b in bugs]
@@ -138,7 +172,7 @@ def get_metrics(start, end, author = None, config = None):
         'v4' : end,
     }
 
-    bugs = bz.query(qd)
+    bugs = bugzilla_query(bz, qd, config)
 
     metrics['assigned'] = len(bugs)
     #metrics['assigned_ids'] = [b.id for b in bugs]
@@ -166,7 +200,7 @@ def get_metrics(start, end, author = None, config = None):
         'v4' : end,
     }
 
-    bugs = bz.query(qd)
+    bugs = bugzilla_query(bz, qd, config)
 
     metrics['qa_ack+'] = len(bugs)
     #metrics['qa-ack+_ids'] = [b.id for b in bugs]
