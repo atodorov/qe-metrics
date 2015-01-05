@@ -62,22 +62,23 @@ def get_metrics(start, end, author = None, config = None):
 
     qd = {
         'query_format' : 'advanced',
+        'j_top' : 'AND_G',
 
-        'field0-0-0' : 'bug_status',
-        'type0-0-0' : 'changedto',
-        'value0-0-0' : 'VERIFIED',
+        'f1' : 'bug_status',
+        'o1' : 'changedto',
+        'v1' : 'VERIFIED',
 
-        'field0-1-0' : 'bug_status',
-        'type0-1-0' : 'changedby',
-        'value0-1-0' : author,
+        'f2' : 'bug_status',
+        'o2' : 'changedby',
+        'v2' : author,
 
-        'field0-2-0' : 'bug_status',
-        'type0-2-0' : 'changedafter',
-        'value0-2-0' : start,
+        'f3' : 'bug_status',
+        'o3' : 'changedafter',
+        'v3' : start,
 
-        'field0-3-0' : 'bug_status',
-        'type0-3-0' : 'changedbefore',
-        'value0-3-0' : end,
+        'f4' : 'bug_status',
+        'o4' : 'changedbefore',
+        'v4' : end,
     }
 
     bugs = bz.query(qd)
@@ -89,22 +90,23 @@ def get_metrics(start, end, author = None, config = None):
 
     qd = {
         'query_format' : 'advanced',
+        'j_top' : 'AND_G',
 
-        'field0-0-0' : 'cf_verified',
-        'type0-0-0' : 'substring',
-        'value0-0-0' : 'SanityOnly',
+        'f1' : 'cf_verified',
+        'o1' : 'substring',
+        'v1' : 'SanityOnly',
 
-        'field0-1-0' : 'cf_verified',
-        'type0-1-0' : 'changedby',
-        'value0-1-0' : author,
+        'f2' : 'cf_verified',
+        'o2' : 'changedby',
+        'v2' : author,
 
-        'field0-2-0' : 'cf_verified',
-        'type0-2-0' : 'changedafter',
-        'value0-2-0' : start,
+        'f3' : 'cf_verified',
+        'o3' : 'changedafter',
+        'v3' : start,
 
-        'field0-3-0' : 'cf_verified',
-        'type0-3-0' : 'changedbefore',
-        'value0-3-0' : end,
+        'f4' : 'cf_verified',
+        'o4' : 'changedbefore',
+        'v4' : end,
     }
 
     bugs = bz.query(qd)
@@ -146,6 +148,7 @@ def get_metrics(start, end, author = None, config = None):
 
     qd = {
         'query_format' : 'advanced',
+#        'j_top' : 'AND_G', # not sure if we need to use this here, see issue #4
 
         'field0-0-0' : 'setters.login_name',
         'type0-0-0' : 'equals',
