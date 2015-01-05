@@ -117,22 +117,23 @@ def get_metrics(start, end, author = None, config = None):
 
     qd = {
         'query_format' : 'advanced',
+        'j_top' : 'AND_G',
 
-        'field0-0-0' : 'bug_status',
-        'type0-0-0' : 'changedto',
-        'value0-0-0' : 'ASSIGNED',
+        'f1' : 'bug_status',
+        'o1' : 'changedto',
+        'v1' : 'ASSIGNED',
 
-        'field0-1-0' : 'bug_status',
-        'type0-1-0' : 'changedby',
-        'value0-1-0' : author,
+        'f2' : 'bug_status',
+        'o2' : 'changedby',
+        'v2' : author,
 
-        'field0-2-0' : 'bug_status',
-        'type0-2-0' : 'changedafter',
-        'value0-2-0' : start,
+        'f3' : 'bug_status',
+        'o3' : 'changedafter',
+        'v3' : start,
 
-        'field0-3-0' : 'bug_status',
-        'type0-3-0' : 'changedbefore',
-        'value0-3-0' : end,
+        'f4' : 'bug_status',
+        'o4' : 'changedbefore',
+        'v4' : end,
     }
 
     bugs = bz.query(qd)
