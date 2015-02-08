@@ -25,6 +25,7 @@ Create config files in `~/.qe-metrics`:
         beaker = 0
 
 * `bugzilla.conf`
+   (requires installing the python-bugzilla package)
 
         [main]
         url = bugzilla.example.com
