@@ -1,6 +1,6 @@
 QE-Metrics is a set of tools which provide metrics information for QE folks.
 
-It's goal is to make it easy to track personal perfomance for people working
+It's goal is to make it easy to track personal performance for people working
 in QE departments. The project has a modular architecture to allow extracting
 metrics from different QE related systems.
 
@@ -25,6 +25,7 @@ Create config files in `~/.qe-metrics`:
         beaker = 0
 
 * `bugzilla.conf`
+   (requires installing the python-bugzilla package)
 
         [main]
         url = bugzilla.example.com
