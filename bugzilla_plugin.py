@@ -9,6 +9,7 @@ import getpass
 import bugzilla
 import requests
 import ConfigParser
+from bugzilla.base import BugzillaError
 
 def bugzilla_query(bz, query, config):
     """
@@ -72,9 +73,18 @@ def get_metrics(start, end, author = None, config = None):
         author = user
 
     bz = bugzilla.Bugzilla(url='https://%s/xmlrpc.cgi' % config['url'])
-    if not bz.login(user, password):
-        print 'Login failed.'
-        sys.exit(1)
+
+    while True:
+        try:
+            bz.login(user, password)
+            break
+        except BugzillaError, e:
+            if e.message.find('Login failed') > -1:
+                password = getpass.getpass('Password for %s: ' % user)
+                continue
+            else:
+                print e.message
+                sys.exit(1)
 
     ##### NEW bugs opened during period
     qd = {
