@@ -1,10 +1,9 @@
 # Set to 0 to disable
 
 [plugins]
-bugzilla = 1
-request-tracker = 1
-nitrate = 1
-moinmoin = 1
 beaker = 0
+bugzilla = 1
 github = 1
-bitbucket = 1
+moinmoin = 1
+nitrate = 1
+request-tracker = 1

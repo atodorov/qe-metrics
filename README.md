@@ -19,7 +19,6 @@ Create config files in `~/.qe-metrics`:
         # Set to 0 to disable
         [plugins]
         beaker = 1
-        bitbucket = 1
         bugzilla = 1
         github = 1
         moinmoin = 1
@@ -31,11 +30,6 @@ Create config files in `~/.qe-metrics`:
         [main]
         url = beaker.example.com
         username = you@example.com
-
-* `bitbucket.conf`
-
-        [main]
-        username = your_username
 
 * `bugzilla.conf`
    (requires installing the python-bugzilla package)
@@ -88,10 +82,6 @@ Metrics
     - **NOT YET IMPLEMENTED**
     - number of new/updated tests
     - number of test jobs execution
-* [BitBucket](https://bitbucket.org) - code collaboration
-    - number of newly opened issues
-    - number of newly opened pull requests
-    - number of commits across any public repositories
 * [Bugzilla](http://www.bugzilla.org/) - bug tracking
     - number of bugs where status changed to `ASSIGNED`
     - number of newly opened bugs
