@@ -18,11 +18,24 @@ Create config files in `~/.qe-metrics`:
 
         # Set to 0 to disable
         [plugins]
+        beaker = 1
+        bitbucket = 1
         bugzilla = 1
-        request_tracker = 1
-        nitrate = 1
+        github = 1
         moinmoin = 1
-        beaker = 0
+        nitrate = 1
+        request_tracker = 1
+
+* `beaker.conf`
+
+        [main]
+        url = beaker.example.com
+        username = you@example.com
+
+* `bitbucket.conf`
+
+        [main]
+        username = your_username
 
 * `bugzilla.conf`
    (requires installing the python-bugzilla package)
@@ -31,12 +44,16 @@ Create config files in `~/.qe-metrics`:
         url = bugzilla.example.com
         username = you@example.com
 
-* `request_tracker.conf`
+* `github.conf`
 
         [main]
-        url = rt.example.com/rt
-        email = you@example.com
-        krb_auth = True
+        username = your_username
+
+* `moinmoin.conf`
+
+        [main]
+        url = wiki.example.com
+        username = you
 
 * `nitrate.conf`
 
@@ -46,18 +63,14 @@ Create config files in `~/.qe-metrics`:
         password = foo
         use_mod_kerb = True
 
-
-* `moinmoin.conf`
-
-        [main]
-        url = wiki.example.com
-        username = you
-
-* `beaker.conf`
+* `request_tracker.conf`
 
         [main]
-        url = beaker.example.com
-        username = you@example.com
+        url = rt.example.com/rt
+        email = you@example.com
+        krb_auth = True
+
+
 
 
 QE-Metrics will ask for password when needed if not specified. 
@@ -75,6 +88,10 @@ Metrics
     - **NOT YET IMPLEMENTED**
     - number of new/updated tests
     - number of test jobs execution
+* [BitBucket](https://bitbucket.org) - code collaboration
+    - number of newly opened issues
+    - number of newly opened pull requests
+    - number of commits across any public repositories
 * [Bugzilla](http://www.bugzilla.org/) - bug tracking
     - number of bugs where status changed to `ASSIGNED`
     - number of newly opened bugs
@@ -82,6 +99,10 @@ Metrics
     - If Flags and additional fields are available
         * number of bug where flag was set to `qa_ack+`
         * number of bugs were cf_verified field was set to SanityOnly
+* [GitHub](https://github.com) - code collaboration
+    - number of newly opened issues
+    - number of newly opened pull requests
+    - number of commits across any public repositories
 * [MoinMoin](http://moinmo.in) - collaborative wiki
     - number of edits
 * [Nitrate](http://fedorahosted.org/nitrate) - test case management
