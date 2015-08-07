@@ -6,3 +6,5 @@ request-tracker = 1
 nitrate = 1
 moinmoin = 1
 beaker = 0
+github = 1
+bitbucket = 1
