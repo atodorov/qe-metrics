@@ -21,6 +21,12 @@ def get_config(filename):
     return conf
 
 def get_metrics(start, end, author = None, config = None):
+
+    # GitHub search API uses dates, not hours
+    if len(start) == 19:
+        start = start[:-9]
+        end = end[:-9]
+
     metrics = {}
 
     if config is None:
