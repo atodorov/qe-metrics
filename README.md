@@ -93,6 +93,10 @@ Metrics
     - number of newly opened issues
     - number of newly opened pull requests
     - number of commits across any public repositories
+* [GitLab](https://gitlab.com) - code collaboration
+    - number of opened and closed issues
+    - number of opened and closed merge requests
+    - number of commits and git push actions
 * [MoinMoin](http://moinmo.in) - collaborative wiki
     - number of edits
 * [Nitrate](http://fedorahosted.org/nitrate) - test case management

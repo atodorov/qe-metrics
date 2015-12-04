@@ -4,6 +4,7 @@
 beaker = 0
 bugzilla = 1
 github = 1
+gitlab = 1
 moinmoin = 1
 nitrate = 1
 request-tracker = 1
